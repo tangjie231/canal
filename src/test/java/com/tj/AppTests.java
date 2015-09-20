@@ -42,7 +42,6 @@ public class AppTests {
         try {
             connector.connect();
             connector.subscribe(".*\\..*");
-            connector.rollback();
 
             int totalEntryCount = 1200;
             while (emptyCount < totalEntryCount) {
@@ -61,6 +60,7 @@ public class AppTests {
             }
         } catch (CanalClientException e) {
             e.printStackTrace();
+            connector.rollback();
         }finally {
             connector.disconnect();
         }
