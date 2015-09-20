@@ -139,5 +139,55 @@ zookeeper配置
 
 7:运行client程序
 
+8：再复制一个canal组成集群形式
+  canal.properties中修改，保证和另外一个canal不一样即可，其他配置都一样
+   canal.id= 2
+   canal.port= 11112
+9：zkCli使用
+   [zk: 192.168.0.14:2181(CONNECTED) 21] ls /
+   [otter, zookeeper]
+   [zk: 192.168.0.14:2181(CONNECTED) 22] ls /otter
+   [canal]
+   [zk: 192.168.0.14:2181(CONNECTED) 23] ls /otter/canal
+   [cluster, destinations]
+   [zk: 192.168.0.14:2181(CONNECTED) 24] ls /otter/canal/cluster
+   [192.168.0.14:11111, 192.168.0.14:11112]
+   [zk: 192.168.0.14:2181(CONNECTED) 25] ls /otter/canal/destinations
+   [example, my]
+   [zk: 192.168.0.14:2181(CONNECTED) 26] ls /otter/canal/destinations/example
+   [cluster, running]
+   [zk: 192.168.0.14:2181(CONNECTED) 27] ls /otter/canal/destinations/example/running
+   []
+   [zk: 192.168.0.14:2181(CONNECTED) 28] ls /otter/canal/destinations/my/running
+   []
+   [zk: 192.168.0.14:2181(CONNECTED) 29] get /otter/canal/destinations/my/running
+   {"active":true,"address":"192.168.0.14:11112","cid":2}
+   cZxid = 0x50
+   ctime = Sun Sep 20 06:05:25 EDT 2015
+   mZxid = 0x50
+   mtime = Sun Sep 20 06:05:25 EDT 2015
+   pZxid = 0x50
+   cversion = 0
+   dataVersion = 0
+   aclVersion = 0
+   ephemeralOwner = 0x14fe9f9f302000a
+   dataLength = 54
+   numChildren = 0
+   [zk: 192.168.0.14:2181(CONNECTED) 30] get /otter/canal/destinations/example/running
+   {"active":true,"address":"192.168.0.14:11112","cid":2}
+   cZxid = 0x51
+   ctime = Sun Sep 20 06:05:25 EDT 2015
+   mZxid = 0x51
+   mtime = Sun Sep 20 06:05:25 EDT 2015
+   pZxid = 0x51
+   cversion = 0
+   dataVersion = 0
+   aclVersion = 0
+   ephemeralOwner = 0x14fe9f9f302000a
+   dataLength = 54
+   numChildren = 0
+
+
+
 
 
