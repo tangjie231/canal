@@ -36,7 +36,7 @@ public class AppTests {
 
     @Test
     public void simple() throws Exception {
-        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress("192.168.0.14",11111),"example","","");
+        CanalConnector connector = CanalConnectors.newClusterConnector("192.168.0.14:2181","my","","");
         int batchSize = 100;
         int emptyCount = 0;
         try {
